@@ -59,3 +59,33 @@ pytest -q
 ```
 
 See [system architecture](docs/system_architecture.md), [hardware setup](docs/hardware_setup.md), and [control logic](docs/control_logic.md).
+
+## ESP32 Arduino / PlatformIO Firmware
+
+A reference ESP32 firmware implementation is included under PlatformIO using the Arduino framework.
+
+### Firmware features
+
+- 12-bit ESP32 ADC soil-moisture sampling
+- Calibrated ADC-to-moisture percentage conversion
+- 35% watering start threshold
+- 55% watering stop threshold with hysteresis
+- Fail-safe pump OFF behavior on invalid sensor readings
+- Active-low relay support, configurable in include/config.h
+- UART telemetry at 115200 baud
+- Reference pinout: GPIO34 for soil moisture and GPIO26 for relay control
+
+### Build
+
+Install PlatformIO, then run:
+
+    pio run
+    pio run -t upload
+    pio device monitor -b 115200
+
+The PlatformIO build is also configured in GitHub Actions.
+
+See [ESP32 firmware](docs/esp32_firmware.md) and [hardware setup](docs/hardware_setup.md) for the reference configuration.
+
+> The ESP32 implementation is a reference firmware design. Physical wiring, sensor calibration, relay polarity, pump behavior, and hardware measurements have not been validated or claimed in this repository.
+\n
