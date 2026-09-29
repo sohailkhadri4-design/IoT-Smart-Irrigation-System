@@ -1,0 +1,19 @@
+name: PlatformIO ESP32 Build
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Build ESP32 firmware
+        uses: nielsenjared/platformio-action@v1
+        with:
+          command: run
